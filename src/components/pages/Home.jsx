@@ -1,7 +1,8 @@
 import HomeBg from "../../assets/home-bg.png";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { usePlayer } from "../../context/PlayerContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Home = () => {
     const buttonBase = "px-6 py-3 rounded-md text-sm font-bold transition-all duration-300 font-retro";
@@ -11,15 +12,22 @@ const Home = () => {
     const [name, setName] = useState('');
     const { playerName, setPlayerName } = usePlayer();
     const navigate = useNavigate();
+    const inputRef = useRef(null);
 
     const handleStart = () => {
         if (name.trim()) {
             setPlayerName(name.trim());
             navigate("/task");
         } else {
-            alert("Please enter a valid name to start the game.");
+            toast.error("Please enter a valid name to start the game.");
         }
     };
+
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, []);
 
 
     return (
@@ -35,7 +43,7 @@ const Home = () => {
                 </p>
                 <div className="flex flex-col gap-4 justify-center">
                     <input className="px-4 py-2 rounded-md text-sm font-retro bg-gray-700 text-gray-200 border border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all duration-300"
-                        value={name} onChange={(e) => setName(e.target.value)} placeholder={`${playerName ? playerName : "Enter your name"}`}/>
+                        value={name} onChange={(e) => setName(e.target.value)} placeholder={`${playerName ? playerName : "Enter your name"}`} ref={inputRef}/>
                     <button onClick={handleStart} className={`${buttonBase} ${neonGlow}`}>
                         Start Game
                     </button>

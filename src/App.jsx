@@ -1,6 +1,8 @@
 import './App.css'
 import { Outlet } from 'react-router-dom'
 import { PlayerProvider } from "./context/PlayerContext";
+import { Toaster } from "sonner";
+
 
 function App() {
 
@@ -9,6 +11,7 @@ function App() {
             <PlayerProvider>
                 <Outlet />
             </PlayerProvider>
+            <Toaster position="top-center" theme='dark' richColors />
         </>
     )
 }

@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import C1 from "../../assets/char1.png";
 import C2 from "../../assets/char2.png";
 import C3 from "../../assets/char3.png";
+import { toast } from "sonner";
+
+
 
 const Task = () => {
     const { playerName } = usePlayer();
@@ -45,6 +48,7 @@ const Task = () => {
                 <Link
                     to="/game"
                     className="inline-block mt-4 px-6 py-3 bg-cyan-400 text-black font-retro rounded-lg shadow-cyan-400/40 shadow-md hover:bg-cyan-300 transition-all duration-300"
+                    onClick={() => { toast("Start looking!"); } }
                 >
                     Got it!
                 </Link>
